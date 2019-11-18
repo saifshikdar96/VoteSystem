@@ -5,9 +5,11 @@
 typedef unsigned int candidate;
 
 class vote {
+
+	std::vector<candidate> prefs;
 	
-	vote(const std::vector<candidate>& prefs);
 public:
+	vote(const std::vector<candidate>& prefs);
 	const bool spent();
 	const candidate first_preference();
 	void discard(candidate c);

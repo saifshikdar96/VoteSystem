@@ -1,17 +1,29 @@
 #include "vote.h"
 
-vote::vote(const std::vector<candidate>& prefs) {}
+using namespace std;
 
-const bool vote::spent()
-{
-	return false;
+vote::vote(const std::vector<candidate>& prefs) {
+prefs: prefs;
 }
 
-const candidate vote::first_preference()
-{
-	return candidate();
+const bool vote::spent() {
+	if (prefs.empty()) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
-void vote::discard(candidate c)
-{
+const candidate vote::first_preference() {
+	if (spent() == false) {
+		return prefs[0];
+	}
+}
+
+void vote::discard(candidate c) {
+	for (int i = 0; i < prefs.size(); ++i) {
+		if (prefs[i] == c) {
+			prefs.erase(prefs.begin() + --i);
+		}
+	}
 }

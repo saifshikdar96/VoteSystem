@@ -1,7 +1,2 @@
-﻿  election.cpp
-C:\Users\saifs\source\repos\VoteSystem\VoteSystem\election.h(13,8): error C2143: syntax error: missing ';' before '<'
-C:\Users\saifs\source\repos\VoteSystem\VoteSystem\election.h(13,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  main.cpp
-  vote.cpp
-  Generating Code...
-C:\Users\saifs\source\repos\VoteSystem\VoteSystem\election.h(13,56): error C2238: unexpected token(s) preceding ';'
+﻿  main.cpp
+  VoteSystem.vcxproj -> C:\Users\saifs\source\repos\VoteSystem\Debug\VoteSystem.exe

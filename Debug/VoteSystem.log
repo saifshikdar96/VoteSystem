@@ -1,2 +1,4 @@
-﻿  main.cpp
+﻿  election.cpp
+C:\Users\saifs\source\repos\VoteSystem\VoteSystem\election.cpp(8,11): warning C4102: 'collection': unreferenced label
+C:\Users\saifs\source\repos\VoteSystem\VoteSystem\election.cpp(20,20): warning C4018: '<=': signed/unsigned mismatch
   VoteSystem.vcxproj -> C:\Users\saifs\source\repos\VoteSystem\Debug\VoteSystem.exe

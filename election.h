@@ -14,9 +14,9 @@ public:
 	void add_vote(const vote& v);
 	int vote_count() const;
 	void eliminate(candidate c);
-	//vector<pair<candidate, int>> ranked_candidates() const;
+	std::vector < std::pair<candidate, int >> ranked_candidates() const;
 };
 
-//election read_votes(istream& in);
+election read_votes(istream& in);
 
 #endif // !ELECTION_H

@@ -8,8 +8,9 @@ int main() {
 
 	fstream in("votes.txt");
 
+	cout << "Round 1: " << '\n';
+	cout << "First preferences: " << '\n';
 
-	cout << "Round 1: ";
 	return 0;
 
 }

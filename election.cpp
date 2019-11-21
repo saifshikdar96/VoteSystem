@@ -1,6 +1,8 @@
 #include "election.h"
 #include <sstream>
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -22,16 +24,27 @@ void election::eliminate(candidate c){
 	}
 }
 
-/*vector<pair<candidate, int>> election::ranked_candidates() const{
-	return vector<pair<candidate, int>>();
+vector<pair<candidate, int>> election::ranked_candidates() const {
+	vector<pair<candidate, int>> candidates;
+	vector<candidate> firstpref;
+
+
+	return candidates;
 }
 
 election read_votes(istream& in){
 	string line;
+	vector<candidate> tempCandidate;
 	vector<vote> tempvote;
+	election Election = election(tempvote);
 	while (getline(in, line)) {
 		stringstream s(line);
-		tempvote.push_back(s);
+		candidate z;
+		while (s >> z) {
+			tempCandidate.push_back(z);
+		}
+		vote inputVotes = vote(tempCandidate);
+		Election.add_vote(inputVotes);
 	}
-	return ;
-}*/
+	return Election;
+}

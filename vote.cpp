@@ -2,14 +2,13 @@
 
 using namespace std;
 
-vote::vote(const std::vector<candidate>& prefs) {
-prefs: prefs;
-}
+vote::vote(const std::vector<candidate>& prefs) : prefs(prefs) {}
 
 const bool vote::spent() {
 	if (prefs.empty()) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -17,6 +16,9 @@ const bool vote::spent() {
 const candidate vote::first_preference() {
 	if (spent() == false) {
 		return prefs[0];
+	}
+	else {
+		return 0;
 	}
 }
 

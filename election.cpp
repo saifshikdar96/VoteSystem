@@ -1,47 +1,51 @@
 #include "election.h"
-#include <sstream>
-#include <iostream>
+#include "vote.h"
 #include <vector>
 #include <string>
+#include <sstream>
+#include <iostream>
 #include <algorithm>
 
 using namespace std;
 
-election::election(const std::vector<vote>& collection) : collection(collection) {}
+election::election(const std::vector<vote>& sel) : sel(sel) {}
 
 void election::add_vote(const vote& v) {
-	collection.push_back(v);
+	sel.push_back(v);
 }
 
 int election::vote_count() const {
-	return collection.size();
+	return sel.size();
 }
 
 void election::eliminate(candidate c) {
-	for (int i = 0; i <= collection.size(); ++i) {
-		collection[i].discard(c);
+	for (int i = 0; i < sel.size(); ++i) {
+		sel[i].discard(c);
+		if (sel[i].spent()) {
+			sel.erase(sel.begin() + (i--));
+		}
 	}
 }
 
 vector<pair<candidate, int>> election::ranked_candidates() const {
 	vector<pair<candidate, int>> candidates;
-	vector<candidate> firstpref;
+	vector<candidate> first_pref;
 
-	for (vote x : collection) {
-		firstpref.push_back(x.first_preference());
+	for (vote x : sel) {
+		first_pref.push_back(x.first_preference());
 	}
 
-	candidate highestValue = *max_element(firstpref.begin(), firstpref.end());
+	candidate highestValue = *max_element(first_pref.begin(), first_pref.end());
 
-	for (int i = 1; i < highestValue; i++) {
+	for (int i = 1; i < highestValue + 1; i++) {
 		pair<candidate, int> cand;
 		cand.first = i;
-		cand.second = count(firstpref.begin(), firstpref.end(), i);
+		cand.second = count(first_pref.begin(), first_pref.end(), i);
 		candidates.push_back(cand);
 	}
 
-	sort(candidates.begin(), candidates.end(), [](const pair<candidate, int>& a, const pair<candidate, int>& b) {
-		return a.second > b.second;
+	sort(candidates.begin(), candidates.end(), [](const pair<candidate, int>& x, const pair<candidate, int>& y) {
+		return x.second > y.second;
 		});
 
 	return candidates;
@@ -49,17 +53,17 @@ vector<pair<candidate, int>> election::ranked_candidates() const {
 
 election read_votes(istream& in) {
 	string line;
-	vector<candidate> tempCandidate;
-	vector<vote> tempvote;
-	election _election = election(tempvote);
+	vector<vote> tempVote;
 	while (getline(in, line)) {
+		vector<candidate> tempCand;
 		stringstream s(line);
 		candidate z;
 		while (s >> z) {
-			tempCandidate.push_back(z);
+			tempCand.push_back(z);
 		}
-		vote inputVotes = vote(tempCandidate);
-		_election.add_vote(inputVotes);
+		vote inputVotes(tempCand);
+		tempVote.push_back(inputVotes);
 	}
+	election _election(tempVote);
 	return _election;
 }

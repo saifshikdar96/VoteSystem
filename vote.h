@@ -10,9 +10,8 @@ class vote {
 
 public:
 	vote(const std::vector<candidate>& prefs);
-	const bool spent();
-	const candidate first_preference();
+	bool spent() const;
+	candidate first_preference() const;
 	void discard(candidate c);
 };
-
 #endif

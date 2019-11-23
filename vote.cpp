@@ -1,10 +1,14 @@
 #include "vote.h"
+#include <vector>
+#include <iterator>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-vote::vote(const std::vector<candidate>& prefs) : prefs(prefs) {}
+vote::vote(const vector<candidate>& prefs) : prefs(prefs) {}
 
-const bool vote::spent() {
+bool vote::spent() const {
 	if (prefs.empty()) {
 		return true;
 	}
@@ -13,7 +17,7 @@ const bool vote::spent() {
 	}
 }
 
-const candidate vote::first_preference() {
+candidate vote::first_preference() const {
 	if (spent() == false) {
 		return prefs[0];
 	}
@@ -23,9 +27,5 @@ const candidate vote::first_preference() {
 }
 
 void vote::discard(candidate c) {
-	for (int i = 0; i < prefs.size(); ++i) {
-		if (prefs[i] == c) {
-			prefs.erase(prefs.begin() + --i);
-		}
-	}
+	prefs.erase(remove(prefs.begin(), prefs.end(), c), prefs.end());
 }

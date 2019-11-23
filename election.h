@@ -1,14 +1,15 @@
 #ifndef ELECTION_H
 #define ELECTION_H
 #include "vote.h"
-#include <istream>
+#include <vector>
+#include <iostream>
+#include <sstream>
 
 class election {
-	std::vector<vote> collection;
+	std::vector<vote> sel;
 
 public:
-
-	election(const std::vector<vote>& collection);
+	election(const std::vector<vote>& sel);
 	void add_vote(const vote& v);
 	int vote_count() const;
 	void eliminate(candidate c);
@@ -17,4 +18,4 @@ public:
 
 election read_votes(std::istream& in);
 
-#endif ELECTION_H
+#endif
